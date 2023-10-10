@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Client 
 {
-    sealed class EcsInitSystem : IEcsInitSystem, IEcsRunSystem
+    sealed class EcsMovementSystem : IEcsInitSystem, IEcsRunSystem
     {
         private EcsFilter _filter;
         private EcsPool<EcsComponent> _entityPool;
@@ -20,15 +20,18 @@ namespace Client
             foreach (int entity in _filter)
             {
                 ref EcsComponent testComponent = ref _entityPool.Get(entity);
-                ref var tra = ref testComponent.Anchor;
-                tra.position += tra.forward;
-                if (tra.position.x >= 1)
+                ref var transform = ref testComponent.Anchor;
+                ref var speed = ref testComponent.Speed;
+                ref var anplituda = ref testComponent.Anplituda;
+                transform.position += transform.forward * speed * Time.deltaTime;
+                
+                if (transform.position.x >= anplituda)
                 {
-                    tra.rotation = Quaternion.Euler(0, -60, 0);
+                    transform.rotation = Quaternion.Euler(0, -60, 0);
                 }
-                else if (tra.position.x <= -1)
+                else if (transform.position.x <= -anplituda)
                 {
-                    tra.rotation = Quaternion.Euler(0, 60, 0);
+                    transform.rotation = Quaternion.Euler(0, 60, 0);
                 }
                 
                 ref var floatCounter = ref testComponent.Counter;

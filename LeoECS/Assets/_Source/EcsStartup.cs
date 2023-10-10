@@ -14,7 +14,8 @@ namespace Client {
             _systems = new EcsSystems (_world);
             _systems
                 .ConvertScene()
-                .Add(new EcsInitSystem())
+                // .Add(new EcsInitSystem())
+                .Add(new EcsMovementSystem())
                 // register your systems here, for example:
                 // .Add (new TestSystem1 ())
                 // .Add (new TestSystem2 ())

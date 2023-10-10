@@ -8,5 +8,7 @@ namespace Client
     {
         public float Counter;
         public Transform Anchor;
+        public float Anplituda;
+        public float Speed;
     }
 }
